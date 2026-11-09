@@ -313,11 +313,7 @@ function renderLog() {
 
   const day = sets.filter((s) => s.date === date);
   if (!sets.length) {
-    $('#today-list').innerHTML = `<h2 class="sec">Aloitus</h2><div class="group">
-      ${row('1. Valitse liike', '', 'Kirjoita nimi tai napauta pikavalintaa')}
-      ${row('2. Paino ja toistot', '', 'Säädä +/− tai kirjoita numero')}
-      ${row('3. Lisää sarja', '', 'Jokainen sarja kirjataan erikseen')}
-    </div><p class="note">Analytiikka rakentuu kirjausten pohjalta: kehityskäyrät näkyvät, kun liikkeellä on muutama kerta takana.</p>`;
+    $('#today-list').innerHTML = '<p class="note">Kirjaa harjoitukset, niin näet liikkeiden kehityksen ja treenihistorian täällä.</p>';
     return;
   }
   $('#today-list').innerHTML = day.length
@@ -490,7 +486,7 @@ function renderActivity() {
     const d = A.fmtDate(A.addDays(start, i));
     const c = perDay.get(d) || 0;
     const lvl = c ? (c / maxDay > 0.66 ? 3 : c / maxDay > 0.33 ? 2 : 1) : 0;
-    cells += `<div class="${lvl ? 'l' + lvl : ''}${d === ts ? ' today' : ''}${d > ts ? ' future' : ''}"></div>`;
+    cells += `<div class="${lvl ? 'l' + lvl : ''}${d === ts ? ' today' : ''}${d > ts ? ' future' : ''}></div>`;
   }
 
   const ms = A.monthlyStats(sets, t, 6).reverse();
@@ -599,7 +595,7 @@ function renderHistory() {
   for (const d of days.slice(0, historyLimit)) {
     html += `<div class="day-head"><h3>${fmtDay(d.date)}</h3><span>${d.sets.length} sarjaa</span></div><div class="group">${dayBlocks(d.sets)}</div>`;
   }
-  if (days.length > historyLimit) html += `<button class="more" id="h-more">Näytä lisää</button>`;
+  if (days.length > historyLimit) html += '<button class="more" id="h-more">Näytä lisää</button>';
   const body = $('#history-body');
   body.innerHTML = html;
 
