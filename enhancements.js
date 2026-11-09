@@ -1,4 +1,5 @@
-// Persistent custom exercise list and a low-precision repetitions helper.
+// Persistent custom exercise list. Reps are entered directly in the numeric field;
+// avoid a dynamically rescaled slider whose range becomes difficult to control.
 const $ = (selector, root = document) => root.querySelector(selector);
 const KEY = 'sali.custom-exercises.v1';
 const safeJSON = (value) => { try { return JSON.parse(value); } catch { return null; } };
@@ -21,33 +22,6 @@ function saveExercises() {
     return false;
   }
 }
-
-function addRepsRange(input) {
-  const row = input.closest('.stp-row');
-  if (!row) return;
-  const slider = document.createElement('input');
-  slider.type = 'range';
-  slider.className = 'dial-range';
-  slider.min = '1';
-  slider.max = '50';
-  slider.step = '1';
-  slider.setAttribute('aria-label', 'Säädä toistoja liu’uttamalla');
-  row.parentElement.insertBefore(slider, row.nextSibling);
-
-  const syncRange = () => {
-    const value = Number(input.value);
-    slider.value = String(Number.isFinite(value) && value >= 1 ? Math.min(value, Number(slider.max)) : 1);
-  };
-  input.addEventListener('input', syncRange);
-  input.addEventListener('change', syncRange);
-  slider.addEventListener('input', () => {
-    input.value = slider.value;
-    if (Number(slider.value) >= Number(slider.max) - 2) slider.max = String(Number(slider.max) + 20);
-  });
-  syncRange();
-}
-
-addRepsRange($('#f-reps'));
 
 const addButton = document.createElement('button');
 addButton.type = 'button';

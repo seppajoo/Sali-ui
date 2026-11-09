@@ -1,0 +1,31 @@
+/* Workout draft and explicit finish action. */
+.save-workout {
+  display: block;
+  width: 100%;
+  margin: 10px 0 16px;
+  padding: 13px 15px;
+  border: 1px solid var(--accent-lo);
+  border-radius: var(--r);
+  background: linear-gradient(180deg, rgba(62, 37, 49, .96), rgba(27, 19, 27, .98));
+  color: var(--fg);
+  font-family: var(--cond);
+  font-size: 19px;
+  font-weight: 800;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  box-shadow: var(--bevel), 0 5px 16px rgba(120, 35, 60, .18);
+}
+.save-workout:active { transform: translateY(1px); }
+.draft-workout { margin: 22px 0 0; }
+.draft-row .k { min-width: 0; overflow-wrap: anywhere; }
+.draft-delete {
+  flex: 0 0 auto;
+  color: var(--fg-2);
+  padding: 8px 10px;
+  border: 1px solid var(--edge);
+  border-radius: 4px;
+  font-family: var(--cond);
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+}

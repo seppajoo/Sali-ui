@@ -30,12 +30,10 @@
           <input type="date" id="f-date" required aria-label="Päivä">
         </label>
       </header>
-
       <form id="log-form" autocomplete="off">
         <input type="text" id="f-exercise" class="ex-input" list="exercise-options" placeholder="Liike" required aria-label="Liike" enterkeyhint="next">
         <datalist id="exercise-options"></datalist>
         <div id="recent-chips" class="chips"></div>
-
         <div class="steppers">
           <div class="stp">
             <div class="stp-cap">Paino</div>
@@ -56,33 +54,26 @@
             <div class="stp-unit">toistoa</div>
           </div>
         </div>
-        <button type="submit" class="cta">Lisää sarja</button>
+        <button type="submit" class="cta">Lisää sarja treeniin</button>
       </form>
-
       <div id="last-time" class="hidden"></div>
+      <div id="draft-workout" class="hidden"></div>
       <div id="today-list"></div>
     </section>
-
     <section id="view-progress" class="view"><div id="progress-body"></div></section>
     <section id="view-activity" class="view"><div id="activity-body"></div></section>
     <section id="view-history" class="view"><div id="history-body"></div></section>
   </main>
-
   <nav class="tabs">
-    <button data-view="log" class="on">
-      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v8M8 12h8"/></svg>Kirjaa</button>
-    <button data-view="progress">
-      <svg viewBox="0 0 24 24"><path d="M3 17l5-5 4 4 8-9"/><path d="M15 7h5v5"/></svg>Kehitys</button>
-    <button data-view="activity">
-      <svg viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg>Aktiivisuus</button>
-    <button data-view="history">
-      <svg viewBox="0 0 24 24"><path d="M8 6h12M8 12h12M8 18h12"/><circle cx="4" cy="6" r=".6"/><circle cx="4" cy="12" r=".6"/><circle cx="4" cy="18" r=".6"/></svg>Historia</button>
+    <button data-view="log" class="on"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v8M8 12h8"/></svg>Kirjaa</button>
+    <button data-view="progress"><svg viewBox="0 0 24 24"><path d="M3 17l5-5 4 4 8-9"/><path d="M15 7h5v5"/></svg>Kehitys</button>
+    <button data-view="activity"><svg viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg>Aktiivisuus</button>
+    <button data-view="history"><svg viewBox="0 0 24 24"><path d="M8 6h12M8 12h12M8 18h12"/><circle cx="4" cy="6" r=".6"/><circle cx="4" cy="12" r=".6"/><circle cx="4" cy="18" r=".6"/></svg>Historia</button>
   </nav>
-
   <div id="toast" class="toast" role="status"></div>
   <input type="file" id="file-import" accept=".json,.csv" hidden>
-
   <script type="module" src="app.js"></script>
   <script type="module" src="enhancements.js"></script>
+  <script type="module" src="workout-session.js"></script>
 </body>
 </html>
