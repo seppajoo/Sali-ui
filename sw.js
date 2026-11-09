@@ -1,5 +1,5 @@
 // Offline-välimuisti. Nosta VERSION aina kun julkaiset muutoksia.
-const VERSION = 'sali-v7';
+const VERSION = 'sali-v8';
 const ASSETS = ['./', 'index.html', 'style.css', 'theme.css', 'weight-input.css', 'app.js', 'enhancements.js', 'analytics.js', 'manifest.webmanifest', 'icon.svg', 'icon-192.png', 'icon-512.png',
   'fonts/barlow-condensed-500.woff2', 'fonts/barlow-condensed-600.woff2', 'fonts/barlow-condensed-700.woff2', 'fonts/barlow-condensed-800.woff2'];
 
