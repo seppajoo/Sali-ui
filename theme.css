@@ -50,7 +50,7 @@ h2.sec::before { box-shadow: 0 0 10px rgba(199, 71, 97, .55); }
 .tabs button.on::before { background: var(--accent); box-shadow: 0 0 10px var(--accent); }
 .toast.hot { background: linear-gradient(180deg, var(--accent-hi), var(--accent-lo)); border-color: #5e1e32; }
 
-/* Swipeable range controls replace repeated +/- tapping; the number fields remain editable. */
+/* Swipeable repetition control; weight is entered precisely in its number field. */
 .dial-range {
   display: block;
   width: 100%;
@@ -92,7 +92,16 @@ h2.sec::before { box-shadow: 0 0 10px rgba(199, 71, 97, .55); }
   background: var(--accent);
   box-shadow: 0 0 0 4px rgba(199, 71, 97, .18), 0 2px 5px #000;
 }
-.stp-row button[data-step] { display: none; }
+/* Keep weight +/- controls; only repetition buttons are replaced by the range. */
+.stp-row button[data-step="reps"] { display: none; }
+#f-weight {
+  min-height: 54px;
+  border: 1px solid var(--edge);
+  border-radius: 5px;
+  background: rgba(9, 8, 11, .65);
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, .35);
+}
+#f-weight:focus { outline: 2px solid rgba(237, 113, 134, .7); outline-offset: 2px; }
 .stp-unit { color: var(--fg-2); }
 .exercise-add {
   display: block;
