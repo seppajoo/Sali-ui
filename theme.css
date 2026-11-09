@@ -1,4 +1,4 @@
-// Deftones-inspired night palette: charcoal, soft silver, and bruised crimson.
+/* Original, album-inspired night palette and soft abstract lighting. */
 :root {
   --bg: #09080b;
   --surface: #151218;
@@ -24,75 +24,54 @@
 html { background: var(--bg); }
 body {
   position: relative;
-  margin: 0;
   color: var(--fg);
-  min-height: 100vh;
   background:
-    radial-gradient(120% 80% at 20% 0%, rgba(233, 96, 124, 0.18), transparent 30%),
-    radial-gradient(80% 60% at 80% 8%, rgba(206, 210, 220, 0.10), transparent 28%),
-    radial-gradient(90% 70% at 50% 55%, rgba(18, 16, 20, 0.28), rgba(9, 8, 11, 0.9) 58%),
+    radial-gradient(120% 80% at 20% 0%, rgba(233, 96, 124, .14), transparent 34%),
+    radial-gradient(80% 60% at 80% 8%, rgba(206, 210, 220, .09), transparent 30%),
     linear-gradient(145deg, #0b090d 0%, #100c12 50%, #08080a 100%);
   overflow-x: hidden;
 }
-
-body::before,
-body::after {
+body::before, body::after {
   content: "";
   position: fixed;
   inset: -12% -8%;
   pointer-events: none;
   z-index: 0;
 }
-
 body::before {
   background:
-    radial-gradient(30% 35% at 22% 28%, rgba(255, 255, 255, 0.16), transparent 60%),
-    radial-gradient(28% 30% at 78% 26%, rgba(206, 210, 220, 0.11), transparent 60%),
-    radial-gradient(34% 30% at 50% 68%, rgba(172, 46, 72, 0.22), transparent 60%),
-    linear-gradient(120deg, rgba(255,255,255,0.04), transparent 40%, rgba(255,255,255,0.02) 55%, transparent 80%);
-  filter: blur(32px) saturate(1.2);
-  opacity: 0.9;
+    radial-gradient(30% 35% at 22% 28%, rgba(255,255,255,.12), transparent 60%),
+    radial-gradient(28% 30% at 78% 26%, rgba(206,210,220,.08), transparent 60%),
+    radial-gradient(34% 30% at 50% 68%, rgba(172,46,72,.17), transparent 60%);
+  filter: blur(36px) saturate(1.1);
 }
-
 body::after {
-  background:
-    repeating-linear-gradient(
-      120deg,
-      rgba(255, 255, 255, 0.018) 0,
-      rgba(255, 255, 255, 0.018) 1px,
-      transparent 1.5px,
-      transparent 4px
-    );
+  background: repeating-linear-gradient(120deg, rgba(255,255,255,.012) 0 1px, transparent 1.5px 5px);
   mix-blend-mode: screen;
-  opacity: 0.5;
+  opacity: .35;
 }
+main, .tabs, #toast { position: relative; z-index: 1; }
 
-main, .tabs, #toast {
-  position: relative;
-  z-index: 1;
-}
-
-.vh h1, .hero-value, .stp-row input, .day-head h3 { filter: drop-shadow(0 2px 3px rgba(0, 0, 0, .7)); }
-h2.sec::before { box-shadow: 0 0 10px rgba(199, 71, 97, .55); }
+h2.sec::before { box-shadow: 0 0 8px rgba(199,71,97,.4); }
 .ex-input:focus { border-bottom-color: var(--accent-hi); }
-.chips button.on { color: #f39aaa; border-color: var(--accent); box-shadow: var(--bevel), 0 0 14px rgba(199, 71, 97, .22); }
-.stp { background: linear-gradient(150deg, rgba(35, 27, 38, .96), rgba(17, 14, 19, .98)); }
+.chips button.on { color: #f39aaa; border-color: var(--accent); box-shadow: var(--bevel), 0 0 12px rgba(199,71,97,.18); }
+.stp { background: linear-gradient(150deg, rgba(35,27,38,.96), rgba(17,14,19,.98)); }
 .stp-row button, .mini-stp button { background: radial-gradient(circle at 50% 30%, #493849, #1b171e 72%); }
 .cta {
-  background: linear-gradient(180deg, #e06a7e 0%, #bd405a 48%, #76263c 100%);
+  background: linear-gradient(180deg, #dc7182 0%, #b94a60 48%, #762e43 100%);
   border-color: #5e1e32;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.28), inset 0 -2px 0 rgba(0,0,0,.3), 0 8px 24px rgba(171, 45, 75, .24);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.25), inset 0 -2px 0 rgba(0,0,0,.3), 0 6px 18px rgba(171,45,75,.18);
 }
-.pr { background: linear-gradient(180deg, var(--accent-hi), var(--accent-lo)); box-shadow: 0 0 10px rgba(199, 71, 97, .4); }
-.goalbar i.on { background: linear-gradient(180deg, var(--accent-hi), var(--accent-lo)); box-shadow: 0 0 8px rgba(199, 71, 97, .42); }
+.pr { background: linear-gradient(180deg, var(--accent-hi), var(--accent-lo)); box-shadow: 0 0 8px rgba(199,71,97,.32); }
+.goalbar i.on { background: linear-gradient(180deg, var(--accent-hi), var(--accent-lo)); box-shadow: 0 0 7px rgba(199,71,97,.35); }
 .heat div.l1 { background: #522735; }
 .heat div.l2 { background: #91334d; }
-.heat div.l3 { background: var(--accent); box-shadow: 0 0 7px rgba(199, 71, 97, .45); }
-.tabs button.on svg { stroke: var(--accent-hi); filter: drop-shadow(0 0 6px rgba(199, 71, 97, .5)); }
-.tabs button.on::before { background: var(--accent); box-shadow: 0 0 10px var(--accent); }
+.heat div.l3 { background: var(--accent); box-shadow: 0 0 6px rgba(199,71,97,.35); }
+.tabs button.on svg { stroke: var(--accent-hi); filter: drop-shadow(0 0 5px rgba(199,71,97,.4)); }
+.tabs button.on::before { background: var(--accent); box-shadow: 0 0 8px var(--accent); }
 .toast.hot { background: linear-gradient(180deg, var(--accent-hi), var(--accent-lo)); border-color: #5e1e32; }
 
-/* Repetition control is a swipeable helper; weight stays explicit for easy exact entry. */
+/* The reps slider is a helper; weight is entered precisely in its number field. */
 .dial-range {
   display: block;
   width: 100%;
@@ -104,59 +83,19 @@ h2.sec::before { box-shadow: 0 0 10px rgba(199, 71, 97, .55); }
   touch-action: pan-y;
   cursor: ew-resize;
 }
-.dial-range::-webkit-slider-runnable-track {
-  height: 5px;
-  border-radius: 5px;
-  background: linear-gradient(90deg, var(--accent-lo), var(--accent-hi));
-  box-shadow: 0 0 8px rgba(199, 71, 97, .2);
-}
-.dial-range::-moz-range-track {
-  height: 5px;
-  border-radius: 5px;
-  background: linear-gradient(90deg, var(--accent-lo), var(--accent-hi));
-}
+.dial-range::-webkit-slider-runnable-track { height: 5px; border-radius: 5px; background: linear-gradient(90deg, var(--accent-lo), var(--accent-hi)); }
+.dial-range::-moz-range-track { height: 5px; border-radius: 5px; background: linear-gradient(90deg, var(--accent-lo), var(--accent-hi)); }
 .dial-range::-webkit-slider-thumb {
-  width: 20px;
-  height: 20px;
-  margin-top: -7.5px;
-  appearance: none;
-  -webkit-appearance: none;
-  border: 2px solid #f1dce4;
-  border-radius: 50%;
-  background: var(--accent);
-  box-shadow: 0 0 0 4px rgba(199, 71, 97, .18), 0 2px 5px #000;
+  width: 20px; height: 20px; margin-top: -7.5px; appearance: none; -webkit-appearance: none;
+  border: 2px solid #f1dce4; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 4px rgba(199,71,97,.16), 0 2px 5px #000;
 }
-.dial-range::-moz-range-thumb {
-  width: 16px;
-  height: 16px;
-  border: 2px solid #f1dce4;
-  border-radius: 50%;
-  background: var(--accent);
-  box-shadow: 0 0 0 4px rgba(199, 71, 97, .18), 0 2px 5px #000;
-}
+.dial-range::-moz-range-thumb { width: 16px; height: 16px; border: 2px solid #f1dce4; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 4px rgba(199,71,97,.16), 0 2px 5px #000; }
 .stp-row button[data-step="reps"] { display: none; }
-#f-weight {
-  min-height: 54px;
-  border: 1px solid var(--edge);
-  border-radius: 5px;
-  background: rgba(9, 8, 11, .65);
-  box-shadow: inset 0 2px 5px rgba(0, 0, 0, .35);
-}
-#f-weight:focus { outline: 2px solid rgba(237, 113, 134, .7); outline-offset: 2px; }
 .stp-unit { color: var(--fg-2); }
 .exercise-add {
-  display: block;
-  margin: 8px 0 0 auto;
-  padding: 8px 11px;
-  color: var(--fg-2);
-  border: 1px solid var(--edge);
-  border-radius: 4px;
-  background: rgba(21, 18, 24, .72);
-  font-family: var(--cond);
-  font-size: 15px;
-  font-weight: 700;
-  letter-spacing: .08em;
-  text-transform: uppercase;
+  display: block; margin: 8px 0 0 auto; padding: 8px 11px; color: var(--fg-2);
+  border: 1px solid var(--edge); border-radius: 4px; background: rgba(21,18,24,.72);
+  font-family: var(--cond); font-size: 15px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
 }
 .exercise-add::before { content: "+ "; color: var(--accent-hi); }
 .exercise-add.saved { color: var(--accent-hi); border-color: var(--accent-lo); }

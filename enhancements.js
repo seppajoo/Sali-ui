@@ -1,4 +1,4 @@
-// Enhancements for the lightweight, offline-first training log.
+// Persistent custom exercise list and a low-precision repetitions helper.
 const $ = (selector, root = document) => root.querySelector(selector);
 const KEY = 'sali.custom-exercises.v1';
 const safeJSON = (value) => { try { return JSON.parse(value); } catch { return null; } };
@@ -22,39 +22,32 @@ function saveExercises() {
   }
 }
 
-function addRange(input, stepType) {
+function addRepsRange(input) {
   const row = input.closest('.stp-row');
   if (!row) return;
   const slider = document.createElement('input');
   slider.type = 'range';
   slider.className = 'dial-range';
-  slider.dataset.dial = stepType;
-  slider.setAttribute('aria-label', stepType === 'weight' ? 'Säädä painoa liu’uttamalla' : 'Säädä toistoja liu’uttamalla');
-  slider.min = stepType === 'weight' ? '0' : '1';
-  slider.step = stepType === 'weight' ? '0.25' : '1';
-  const rowWrap = row.parentElement;
-  rowWrap.insertBefore(slider, row.nextSibling);
+  slider.min = '1';
+  slider.max = '50';
+  slider.step = '1';
+  slider.setAttribute('aria-label', 'Säädä toistoja liu’uttamalla');
+  row.parentElement.insertBefore(slider, row.nextSibling);
 
   const syncRange = () => {
-    const value = Number(String(input.value).replace(',', '.'));
-    const minMax = stepType === 'weight' ? Math.max(300, Math.ceil((value + 50) / 25) * 25) : Math.max(50, value + 20);
-    slider.max = String(minMax);
-    slider.value = String(Number.isFinite(value) ? Math.max(Number(slider.min), Math.min(value, minMax)) : Number(slider.min));
+    const value = Number(input.value);
+    slider.value = String(Number.isFinite(value) && value >= 1 ? Math.min(value, Number(slider.max)) : 1);
   };
   input.addEventListener('input', syncRange);
   input.addEventListener('change', syncRange);
   slider.addEventListener('input', () => {
-    const value = Number(slider.value);
-    input.value = stepType === 'weight' ? String(Number(value.toFixed(2))) : String(Math.round(value));
-    if (Number(slider.value) >= Number(slider.max) - Number(slider.step) * 2) {
-      slider.max = String(Number(slider.max) + (stepType === 'weight' ? 100 : 20));
-    }
+    input.value = slider.value;
+    if (Number(slider.value) >= Number(slider.max) - 2) slider.max = String(Number(slider.max) + 20);
   });
   syncRange();
 }
 
-addRange($('#f-weight'), 'weight');
-addRange($('#f-reps'), 'reps');
+addRepsRange($('#f-reps'));
 
 const addButton = document.createElement('button');
 addButton.type = 'button';
@@ -108,8 +101,7 @@ function syncChoices() {
   const chips = $('#recent-chips');
   if (!datalist || !chips) return;
   const known = new Set([...datalist.options].map((option) => option.value.toLocaleLowerCase('fi')));
-  const allExercises = [...new Set(exercises)];
-  for (const name of allExercises) {
+  for (const name of exercises) {
     if (!known.has(name.toLocaleLowerCase('fi'))) {
       const option = document.createElement('option');
       option.value = name;
