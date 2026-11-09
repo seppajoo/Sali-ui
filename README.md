@@ -18,6 +18,14 @@ Kuntosalitreenien kirjaus- ja analytiikkasovellus. Toimii puhelimessa asennettav
 
 **Historia**: kaikki kirjaukset päivittäin, poisto (kumottavissa), vienti JSON/CSV ja tuonti.
 
+## Kaaviot ja värinäpalaute
+
+Kaavioita luetaan liu'uttamalla sormea niiden yli: arvo, päivä ja paras sarja päivittyvät otsikkolukuun, viiva värittyy kosketuskohtaan asti ja jokainen datapiste antaa kevyen haptisen napsahduksen. Viivan väri kertoo suunnan valitulla aikavälillä (vihreä nousu, punainen lasku).
+
+- **Android (Chrome):** Vibration API.
+- **iPhone:** Safari ei tue Vibration API:a. iOS 18+ antaa haptisen palautteen natiivin switch-kytkimen painalluksesta, ja sovellus käyttää tätä kiertotietä. Se ei ole virallinen rajapinta, joten Apple voi muuttaa sitä.
+- Voit kytkeä palautteen pois Historia-välilehdeltä.
+
 ## Käyttöönotto
 
 1. Ota GitHub Pages käyttöön: *Settings → Pages → Source: GitHub Actions*.

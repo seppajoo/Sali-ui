@@ -1,5 +1,5 @@
 // Offline-välimuisti. Nosta VERSION aina kun julkaiset muutoksia.
-const VERSION = 'sali-v1';
+const VERSION = 'sali-v2';
 const ASSETS = ['./', 'index.html', 'style.css', 'app.js', 'analytics.js', 'manifest.webmanifest', 'icon.svg', 'icon-192.png', 'icon-512.png'];
 
 self.addEventListener('install', (e) => {

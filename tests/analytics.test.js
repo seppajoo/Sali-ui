@@ -86,3 +86,9 @@ test('exerciseList järjestää viimeisimmän mukaan', () => {
   const sets = [S('2026-11-01', 'A', 1, 1), S('2026-11-05', 'B', 1, 1), S('2026-11-03', 'C', 1, 1)];
   assert.deepEqual(A.exerciseList(sets), ['B', 'C', 'A']);
 });
+
+test('isoWeek', () => {
+  assert.equal(A.isoWeek(A.parseDate('2026-11-09')), 46);
+  assert.equal(A.isoWeek(A.parseDate('2026-01-01')), 1);
+  assert.equal(A.isoWeek(A.parseDate('2027-01-03')), 53);
+});

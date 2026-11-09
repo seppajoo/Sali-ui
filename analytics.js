@@ -251,3 +251,12 @@ export function parseCSV(text) {
     ts: i,
   })).filter((s) => /^\d{4}-\d{2}-\d{2}$/.test(s.date) && s.exercise && isFinite(s.weight) && s.reps > 0);
 }
+
+/** ISO-viikkonumero. */
+export function isoWeek(d) {
+  const t = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
+  const day = t.getUTCDay() || 7;
+  t.setUTCDate(t.getUTCDate() + 4 - day);
+  const y0 = new Date(Date.UTC(t.getUTCFullYear(), 0, 1));
+  return Math.ceil(((t - y0) / 864e5 + 1) / 7);
+}
