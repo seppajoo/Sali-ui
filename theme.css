@@ -1,0 +1,117 @@
+// Deftones-inspired night palette: charcoal, soft silver, and bruised crimson.
+:root {
+  --bg: #09080b;
+  --surface: #151218;
+  --surface-2: #211a24;
+  --surface-3: #332a36;
+  --edge: #382d3a;
+  --edge-hi: rgba(235, 220, 240, .09);
+  --hair: rgba(235, 220, 240, .08);
+  --fg: #f0edf1;
+  --fg-2: #aaa1ad;
+  --fg-3: #716777;
+  --steel: #c8bfce;
+  --accent: #c74761;
+  --accent-hi: #ed7186;
+  --accent-lo: #79293f;
+  --up: #80c7a2;
+  --down: #f07179;
+  --chrome: linear-gradient(180deg, #fff 0%, #d7cfd9 42%, #8e8292 55%, #ded5df 76%, #f6f1f7 100%);
+  --plate: linear-gradient(155deg, #1d1720 0%, #100e13 100%);
+  --bevel: inset 0 1px 0 var(--edge-hi), inset 0 -1px 0 rgba(0, 0, 0, .56), 0 2px 6px rgba(0, 0, 0, .45);
+}
+
+html { background: var(--bg); }
+body {
+  background:
+    radial-gradient(ellipse at 82% 4%, rgba(128, 74, 115, .16), transparent 38%),
+    radial-gradient(ellipse at 12% 32%, rgba(116, 35, 57, .13), transparent 42%),
+    repeating-linear-gradient(117deg, transparent 0 22px, rgba(226, 209, 229, .012) 23px, transparent 24px 47px),
+    linear-gradient(145deg, #0b090d 0%, #100c12 50%, #08080a 100%);
+}
+
+.vh h1, .hero-value, .stp-row input, .day-head h3 { filter: drop-shadow(0 2px 3px rgba(0, 0, 0, .7)); }
+h2.sec::before { box-shadow: 0 0 10px rgba(199, 71, 97, .55); }
+.ex-input:focus { border-bottom-color: var(--accent-hi); }
+.chips button.on { color: #f39aaa; border-color: var(--accent); box-shadow: var(--bevel), 0 0 14px rgba(199, 71, 97, .22); }
+.stp { background: linear-gradient(150deg, rgba(35, 27, 38, .96), rgba(17, 14, 19, .98)); }
+.stp-row button, .mini-stp button { background: radial-gradient(circle at 50% 30%, #493849, #1b171e 72%); }
+.cta {
+  background: linear-gradient(180deg, #e06a7e 0%, #bd405a 48%, #76263c 100%);
+  border-color: #5e1e32;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.28), inset 0 -2px 0 rgba(0,0,0,.3), 0 8px 24px rgba(171, 45, 75, .24);
+}
+.pr { background: linear-gradient(180deg, var(--accent-hi), var(--accent-lo)); box-shadow: 0 0 10px rgba(199, 71, 97, .4); }
+.goalbar i.on { background: linear-gradient(180deg, var(--accent-hi), var(--accent-lo)); box-shadow: 0 0 8px rgba(199, 71, 97, .42); }
+.heat div.l1 { background: #522735; }
+.heat div.l2 { background: #91334d; }
+.heat div.l3 { background: var(--accent); box-shadow: 0 0 7px rgba(199, 71, 97, .45); }
+.tabs button.on svg { stroke: var(--accent-hi); filter: drop-shadow(0 0 6px rgba(199, 71, 97, .5)); }
+.tabs button.on::before { background: var(--accent); box-shadow: 0 0 10px var(--accent); }
+.toast.hot { background: linear-gradient(180deg, var(--accent-hi), var(--accent-lo)); border-color: #5e1e32; }
+
+/* Swipeable range controls replace repeated +/- tapping; the number fields remain editable. */
+.dial-range {
+  display: block;
+  width: 100%;
+  height: 28px;
+  margin: 3px 0 0;
+  appearance: none;
+  -webkit-appearance: none;
+  background: transparent;
+  touch-action: pan-y;
+  cursor: ew-resize;
+}
+.dial-range::-webkit-slider-runnable-track {
+  height: 5px;
+  border-radius: 5px;
+  background: linear-gradient(90deg, var(--accent-lo), var(--accent-hi));
+  box-shadow: 0 0 8px rgba(199, 71, 97, .2);
+}
+.dial-range::-moz-range-track {
+  height: 5px;
+  border-radius: 5px;
+  background: linear-gradient(90deg, var(--accent-lo), var(--accent-hi));
+}
+.dial-range::-webkit-slider-thumb {
+  width: 20px;
+  height: 20px;
+  margin-top: -7.5px;
+  appearance: none;
+  -webkit-appearance: none;
+  border: 2px solid #f1dce4;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 4px rgba(199, 71, 97, .18), 0 2px 5px #000;
+}
+.dial-range::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border: 2px solid #f1dce4;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 4px rgba(199, 71, 97, .18), 0 2px 5px #000;
+}
+.stp-row button[data-step] { display: none; }
+.stp-unit { color: var(--fg-2); }
+.exercise-add {
+  display: block;
+  margin: 8px 0 0 auto;
+  padding: 8px 11px;
+  color: var(--fg-2);
+  border: 1px solid var(--edge);
+  border-radius: 4px;
+  background: rgba(21, 18, 24, .72);
+  font-family: var(--cond);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.exercise-add::before { content: "+ "; color: var(--accent-hi); }
+.exercise-add.saved { color: var(--accent-hi); border-color: var(--accent-lo); }
+.exercise-add.saved::before { content: "✓ "; }
+.exercise-add:focus-visible, .dial-range:focus-visible { outline: 2px solid var(--accent-hi); outline-offset: 3px; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; }
+}
