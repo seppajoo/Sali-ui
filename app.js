@@ -70,8 +70,9 @@ const toneOf = (n) => (n > 0 ? 'up' : n < 0 ? 'down' : '');
 const bestSet = (ss, bw) => ss.reduce((b, x) => (bw ? x.reps > b.reps : A.e1rm(x.weight, x.reps) > A.e1rm(b.weight, b.reps)) ? x : b);
 
 let toastTimer;
-function toast(msg, action) {
+function toast(msg, action, hot = false) {
   const t = $('#toast');
+  t.classList.toggle('hot', hot);
   t.innerHTML = `<span>${esc(msg)}</span>`;
   if (action) {
     const b = document.createElement('button');
@@ -118,7 +119,7 @@ function mountChart(el, { type = 'line', points, tone = '', onScrub = () => {}, 
   const H = Math.round(el.clientHeight || (type === 'bar' ? 180 : 220));
   if (!points.length) { el.innerHTML = '<div class="chart-empty">Ei dataa tällä aikavälillä</div>'; return; }
   const id = 'c' + (++chartSeq);
-  const color = tone === 'up' ? 'var(--up)' : tone === 'down' ? 'var(--down)' : 'var(--fg)';
+  const color = tone === 'up' ? 'var(--up)' : tone === 'down' ? 'var(--down)' : 'var(--steel)';
   const T = 22, B = 24;
   const ys = points.map((p) => p.y);
   let xs, svg = '';
@@ -153,7 +154,7 @@ function mountChart(el, { type = 'line', points, tone = '', onScrub = () => {}, 
       <path d="${d}" style="fill:none;stroke:var(--surface-3);stroke-width:2.25;stroke-linejoin:round;stroke-linecap:round"/>
       <g clip-path="url(#${id}k)">
         <path d="${area}" fill="url(#${id}g)"/>
-        <path d="${d}" style="fill:none;stroke:${color};stroke-width:2.25;stroke-linejoin:round;stroke-linecap:round"/>
+        <path d="${d}" style="fill:none;stroke:${color};stroke-width:2.5;stroke-linejoin:round;stroke-linecap:round;filter:drop-shadow(0 0 5px ${color})"/>
       </g>
       ${points.length > 1 ? lbl(iMax, true) + (iMin !== iMax ? lbl(iMin, false) : '') : ''}
       <circle cx="${xs[xs.length - 1]}" cy="${pys[pys.length - 1]}" r="3.5" style="fill:${color}" id="${id}end"/>
@@ -176,9 +177,10 @@ function mountChart(el, { type = 'line', points, tone = '', onScrub = () => {}, 
       const h = Math.max(sy(0) - sy(p.y), 3);
       const met = goal ? p.y >= goal : p.y > 0;
       return `<rect class="b" data-i="${i}" x="${xs[i] - bw * 0.31}" y="${sy(0) - h}" width="${bw * 0.62}" height="${h}" rx="${Math.min(4, bw * 0.2)}"
-        style="fill:${met ? 'var(--up)' : 'var(--surface-3)'};transition:opacity .12s"/>`
+        style="fill:${met ? `url(#${id}m)` : 'var(--surface-3)'};transition:opacity .12s"/>`
         + ((n - 1 - i) % every === 0 ? `<text x="${xs[i]}" y="${H - 6}" text-anchor="middle">${xLabel(p)}</text>` : '');
     }).join('');
+    svg = `<defs><linearGradient id="${id}m" x1="0" x2="0" y1="0" y2="1"><stop offset="0" style="stop-color:var(--accent-hi)"/><stop offset="1" style="stop-color:var(--accent-lo)"/></linearGradient></defs>` + svg;
     if (goal) svg += `<line x1="0" x2="${W}" y1="${sy(goal)}" y2="${sy(goal)}" style="stroke:var(--fg-3);stroke-dasharray:3 4"/>
       <text x="${W}" y="${sy(goal) - 6}" text-anchor="end">tavoite ${goal}</text>`;
   }
@@ -262,7 +264,7 @@ $('#log-form').addEventListener('submit', (e) => {
   save();
   fEx.value = name;
   const isPR = prevBest > 0 && A.e1rm(weight, reps) > prevBest;
-  toast(isPR ? 'Uusi ennätys' : 'Sarja lisätty');
+  toast(isPR ? 'Uusi ennätys' : 'Sarja lisätty', null, isPR);
   haptic(isPR ? 'success' : 'tap');
   renderLog();
 });
@@ -296,7 +298,9 @@ function renderLog() {
   const ex = A.normalizeName(fEx.value);
   $('#date-label').textContent = fmtDay(date);
   $('#exercise-options').innerHTML = list.map((n) => `<option value="${esc(n)}">`).join('');
-  $('#recent-chips').innerHTML = list.slice(0, 12)
+  const STARTERS = ['Penkkipunnerrus', 'Takakyykky', 'Maastaveto', 'Pystypunnerrus', 'Kulmasoutu', 'Leuanveto', 'Dipit', 'Hauiskääntö'];
+  const chipList = list.length ? list.slice(0, 12) : STARTERS;
+  $('#recent-chips').innerHTML = chipList
     .map((n) => `<button type="button" data-pick="${esc(n)}" class="${n === ex ? 'on' : ''}">${esc(n)}</button>`).join('');
 
   const lt = $('#last-time');
@@ -308,6 +312,14 @@ function renderLog() {
   } else lt.className = 'hidden';
 
   const day = sets.filter((s) => s.date === date);
+  if (!sets.length) {
+    $('#today-list').innerHTML = `<h2 class="sec">Aloitus</h2><div class="group">
+      ${row('1. Valitse liike', '', 'Kirjoita nimi tai napauta pikavalintaa')}
+      ${row('2. Paino ja toistot', '', 'Säädä +/− tai kirjoita numero')}
+      ${row('3. Lisää sarja', '', 'Jokainen sarja kirjataan erikseen')}
+    </div><p class="note">Analytiikka rakentuu kirjausten pohjalta: kehityskäyrät näkyvät, kun liikkeellä on muutama kerta takana.</p>`;
+    return;
+  }
   $('#today-list').innerHTML = day.length
     ? `<div class="day-head"><h3>${fmtDay(date)}</h3><span>${day.length} ${day.length === 1 ? 'sarja' : 'sarjaa'}</span></div><div class="group">${dayBlocks(day)}</div>`
     : '';

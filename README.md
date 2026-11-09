@@ -47,5 +47,6 @@ CSV-muoto (`date,exercise,weight,reps`) sopii myös vanhan Excel-datan tuontiin.
 
 - `analytics.js`: kaikki laskenta puhtaina funktioina
 - `app.js`: käyttöliittymä ja omat SVG-kaaviot (ei riippuvuuksia)
+- `fonts/`: Barlow Condensed (SIL Open Font License, ks. `fonts/OFL.txt`), paikallisena offline-käyttöä varten
 - `sw.js`: offline-välimuisti. **Nosta `VERSION` jokaisen julkaisun yhteydessä.**
 - `npm test`: analytiikan yksikkötestit (Node 22+)
