@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="fi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0f1115">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>Salipäiväkirja</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="top">
+    <h1 id="title">Kirjaa</h1>
+  </header>
+
+  <main>
+    <!-- KIRJAA -->
+    <section id="view-log" class="view active">
+      <form id="log-form" class="card" autocomplete="off">
+        <label>Päivä
+          <input type="date" id="f-date" required>
+        </label>
+        <label>Liike
+          <input type="text" id="f-exercise" list="exercise-options" placeholder="esim. Penkkipunnerrus" required>
+          <datalist id="exercise-options"></datalist>
+        </label>
+        <div id="recent-chips" class="chips"></div>
+        <div class="row">
+          <label>Paino (kg)
+            <div class="stepper">
+              <button type="button" data-step="weight" data-delta="-2.5">−</button>
+              <input type="number" id="f-weight" inputmode="decimal" step="0.25" min="0" required>
+              <button type="button" data-step="weight" data-delta="2.5">+</button>
+            </div>
+          </label>
+          <label>Toistot
+            <div class="stepper">
+              <button type="button" data-step="reps" data-delta="-1">−</button>
+              <input type="number" id="f-reps" inputmode="numeric" step="1" min="1" required>
+              <button type="button" data-step="reps" data-delta="1">+</button>
+            </div>
+          </label>
+        </div>
+        <button type="submit" class="primary">Lisää sarja</button>
+      </form>
+
+      <div id="last-time" class="card muted-card hidden"></div>
+      <div id="today-list"></div>
+    </section>
+
+    <!-- LIIKKEET -->
+    <section id="view-progress" class="view">
+      <div class="card">
+        <label>Liike
+          <select id="p-exercise"></select>
+        </label>
+        <div class="seg" id="p-range">
+          <button data-range="90">3 kk</button>
+          <button data-range="180">6 kk</button>
+          <button data-range="365">1 v</button>
+          <button data-range="0" class="on">Kaikki</button>
+        </div>
+      </div>
+      <div id="progress-body"></div>
+    </section>
+
+    <!-- AKTIIVISUUS -->
+    <section id="view-activity" class="view">
+      <div id="activity-body"></div>
+    </section>
+
+    <!-- HISTORIA -->
+    <section id="view-history" class="view">
+      <div class="card">
+        <h3>Varmuuskopio</h3>
+        <p class="small muted">Data on vain tällä laitteella. Vie se säännöllisesti talteen.</p>
+        <div class="btn-row">
+          <button id="btn-export-json">Vie JSON</button>
+          <button id="btn-export-csv">Vie CSV</button>
+          <label class="btn">Tuo tiedosto<input type="file" id="file-import" accept=".json,.csv" hidden></label>
+        </div>
+        <p id="backup-info" class="small muted"></p>
+      </div>
+      <div id="history-body"></div>
+    </section>
+  </main>
+
+  <nav class="tabs">
+    <button data-view="log" class="on"><span>＋</span>Kirjaa</button>
+    <button data-view="progress"><span>📈</span>Liikkeet</button>
+    <button data-view="activity"><span>📅</span>Aktiivisuus</button>
+    <button data-view="history"><span>🗂</span>Historia</button>
+  </nav>
+
+  <div id="toast" class="toast"></div>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
