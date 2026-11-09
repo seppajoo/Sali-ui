@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#09080b">
+  <meta name="theme-color" content="#08090a">
   <meta name="color-scheme" content="dark">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="mobile-web-app-capable" content="yes">
@@ -16,7 +16,7 @@
   <link rel="preload" href="fonts/barlow-condensed-800.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="fonts/barlow-condensed-700.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="theme.css">
+  <link rel="stylesheet" href="weight-input.css">
 </head>
 <body>
   <main>
@@ -41,7 +41,7 @@
             <div class="stp-cap">Paino</div>
             <div class="stp-row">
               <button type="button" data-step="weight" data-delta="-2.5" aria-label="Vähennä painoa">−</button>
-              <input type="number" id="f-weight" inputmode="decimal" step="0.25" min="0" required placeholder="0" aria-label="Paino kiloina">
+              <input type="number" id="f-weight" inputmode="decimal" step="0.25" min="0" required placeholder="0">
               <button type="button" data-step="weight" data-delta="2.5" aria-label="Lisää painoa">+</button>
             </div>
             <div class="stp-unit">kg</div>
@@ -50,7 +50,7 @@
             <div class="stp-cap">Toistot</div>
             <div class="stp-row">
               <button type="button" data-step="reps" data-delta="-1" aria-label="Vähennä toistoja">−</button>
-              <input type="number" id="f-reps" inputmode="numeric" step="1" min="1" required placeholder="0" aria-label="Toistojen määrä">
+              <input type="number" id="f-reps" inputmode="numeric" step="1" min="1" required placeholder="0">
               <button type="button" data-step="reps" data-delta="1" aria-label="Lisää toistoja">+</button>
             </div>
             <div class="stp-unit">toistoa</div>
@@ -83,6 +83,5 @@
   <input type="file" id="file-import" accept=".json,.csv" hidden>
 
   <script type="module" src="app.js"></script>
-  <script type="module" src="enhancements.js"></script>
 </body>
 </html>
