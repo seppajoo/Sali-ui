@@ -28,8 +28,8 @@ Kaavioita luetaan liu'uttamalla sormea niiden yli: arvo, päivä ja paras sarja 
 
 ## Käyttöönotto
 
-1. Ota GitHub Pages käyttöön: *Settings → Pages → Source: GitHub Actions*.
-2. Yhdistä koodi `main`-haaraan. Workflow ajaa testit ja julkaisee osoitteeseen `https://<käyttäjä>.github.io/<repo>/`.
+1. GitHub Pages julkaisee `main`-haaran juuren (*Settings → Pages → Deploy from a branch → main, / (root)*) osoitteeseen https://seppajoo.github.io/Sali-ui/. Jokainen push `main`-haaraan päivittää sovelluksen noin minuutissa.
+2. GitHub Actions ajaa analytiikan testit jokaisesta pushista (`.github/workflows/tests.yml`).
 3. Avaa osoite puhelimessa ja lisää kotinäytölle (iPhone: Safari → Jaa → Lisää Koti-valikkoon; Android: Chrome → Asenna sovellus).
 
 Paikallisesti: `npm start` (tai `python3 -m http.server`) ja avaa `http://localhost:8080`. ES-moduulit ja service worker eivät toimi `file://`-osoitteesta.
